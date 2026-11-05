@@ -629,7 +629,7 @@
         <h2 style="font-size: 1.15rem;">Grade 10 Registration</h2>
         <p class="subtitle">Please complete all required information below.</p>
         
-        <form class="form-portrait" onsubmit="event.preventDefault(); alert('Enrollment Application Submitted Successfully!');">
+        <form class="form-portrait" onsubmit="handleEnrollmentSubmit(event)">
           
           <div class="section-header">1. Personal Details</div>
           <div class="form-group">
@@ -839,12 +839,9 @@
     }
 
     function handleLogout() {
-      if (confirm('Are you sure you want to log out?')) {
-        document.getElementById('dropdownMenu').classList.remove('show');
-        document.getElementById('menuWrapper').style.display = 'none';
-        navigateTo('login-view');
-        alert('You have successfully logged out.');
-      }
+      document.getElementById('dropdownMenu').classList.remove('show');
+      document.getElementById('menuWrapper').style.display = 'none';
+      navigateTo('login-view');
     }
 
     function handleAccountSwitch() {
@@ -862,7 +859,11 @@
       }
       document.getElementById('menuWrapper').style.display = 'block';
       navigateTo('home-view');
-      // Tinanggal na po yung alert dito para deretso pasok sa home-view
+    }
+
+    function handleEnrollmentSubmit(event) {
+      event.preventDefault();
+      navigateTo('home-view');
     }
 
     window.onclick = function(event) {
