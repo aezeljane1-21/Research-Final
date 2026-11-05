@@ -6,7 +6,6 @@
   <title>Ambaguio HS - Grade 10 Web-Based Enrollment System</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
-
     * {
       box-sizing: border-box;
       margin: 0;
@@ -84,6 +83,7 @@
     /* MENU TOGGLE BUTTON */
     .menu-wrapper {
       position: relative;
+      display: none; /* Hidden by default until login */
     }
 
     .menu-toggle-btn {
@@ -490,7 +490,7 @@
               <i class="fa-solid fa-user"></i>
             </div>
             <div class="profile-info">
-              <span class="profile-name" id="currentUserName">Guest Student</span>
+              <span class="profile-name" id="currentUserName">Student Name</span>
               <span class="profile-role">Student Account</span>
             </div>
           </div>
@@ -539,7 +539,8 @@
 
     <div class="portrait-body">
 
-      <section id="login-view" class="view-section card">
+      <!-- Login View Active by Default -->
+      <section id="login-view" class="view-section active-section card">
         <h2 style="font-size: 1.15rem; text-align: center; color: #1e3a8a;">Portal Sign In</h2>
         <p class="subtitle" style="text-align: center;">Log in to access the Enrollment System.</p>
         <hr>
@@ -550,13 +551,13 @@
           </div>
           <div class="form-group">
             <label>LRN / Student ID:</label>
-            <input type="password" id="loginLrn" placeholder="Enter 12-digit LRN" required>
+            <input type="password" placeholder="Enter 12-digit LRN" required>
           </div>
           <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Log In</button>
         </form>
       </section>
 
-      <section id="home-view" class="view-section active-section card">
+      <section id="home-view" class="view-section card">
         <h2 style="font-size: 1.15rem;">Welcome to AHS</h2>
         <p class="subtitle">Grade 10 Online Enrollment Portal</p>
         <hr>
@@ -564,4 +565,314 @@
           Use the menu button on the top right to access your profile, complete your enrollment, or review school policies.
         </p>
 
-        <div class="tile-grid
+        <div class="tile-grid">
+          <div class="tile-item" onclick="navigateTo('enroll-view')">
+            <i class="fa-solid fa-file-pen"></i>
+            <div>
+              <h3>Start Registration</h3>
+              <span style="font-size: 0.72rem; color: #64748b;">Fill Out Grade 10 Form</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="profile-view" class="view-section card">
+        <div class="profile-card-header">
+          <div class="big-avatar">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <h2 style="font-size: 1.1rem;" id="profileDisplayName">Student Name</h2>
+          <span style="font-size: 0.78rem; color: #64748b;"></span>
+          <span class="badge pending" style="margin-top: 6px;">Pending</span>
+        </div>
+
+        <div class="section-header">Personal Information</div>
+        <div class="profile-detail-row">
+          <span class="profile-detail-label">LRN:</span>
+          <span class="profile-detail-value">---</span>
+        </div>
+        <div class="profile-detail-row">
+          <span class="profile-detail-label">Gender:</span>
+          <span class="profile-detail-value">---</span>
+        </div>
+        <div class="profile-detail-row">
+          <span class="profile-detail-label">Birth Date:</span>
+          <span class="profile-detail-value">---</span>
+        </div>
+        <div class="profile-detail-row">
+          <span class="profile-detail-label">Address:</span>
+          <span class="profile-detail-value">---</span>
+        </div>
+
+        <div class="section-header" style="margin-top: 14px;">Guardian & Contact</div>
+        <div class="profile-detail-row">
+          <span class="profile-detail-label">Parent/Guardian:</span>
+          <span class="profile-detail-value">---</span>
+        </div>
+        <div class="profile-detail-row">
+          <span class="profile-detail-label">Contact Number:</span>
+          <span class="profile-detail-value">---</span>
+        </div>
+
+        <div class="section-header" style="margin-top: 14px;">Academic Preference</div>
+        <div class="profile-detail-row">
+          <span class="profile-detail-label">Target Track:</span>
+          <span class="profile-detail-value">---</span>
+        </div>
+
+        <button class="btn btn-primary" style="margin-top: 16px;" onclick="navigateTo('enroll-view')">
+          <i class="fa-solid fa-pen-to-square"></i> Edit Profile Details
+        </button>
+      </section>
+
+      <section id="enroll-view" class="view-section card">
+        <h2 style="font-size: 1.15rem;">Grade 10 Registration</h2>
+        <p class="subtitle">Please complete all required information below.</p>
+        
+        <form class="form-portrait" onsubmit="event.preventDefault(); alert('Enrollment Application Submitted Successfully!');">
+          
+          <div class="section-header">1. Personal Details</div>
+          <div class="form-group">
+            <label>Learner Reference Number (LRN):</label>
+            <input type="text" placeholder="12-digit LRN" required pattern="[0-9]{12}">
+          </div>
+          <div class="form-group">
+            <label>Full Name:</label>
+            <input type="text" placeholder="Last Name, First Name, Middle Name" required>
+          </div>
+          <div class="form-group">
+            <label>Gender:</label>
+            <select><option>Female</option><option>Male</option></select>
+          </div>
+          <div class="form-group">
+            <label>Date of Birth:</label>
+            <input type="date" required>
+          </div>
+          <div class="form-group">
+            <label>Nationality:</label>
+            <input type="text" value="Filipino" required>
+          </div>
+          <div class="form-group">
+            <label>Mother Tongue / Dialect:</label>
+            <input type="text" placeholder="e.g. Ibaloi, Ifugao, Ilokano, Tagalog" required>
+          </div>
+          <div class="form-group">
+            <label>Complete Address:</label>
+            <input type="text" placeholder="House No., Street/Purok, Barangay, City/Municipality" required>
+          </div>
+
+          <div class="section-header">2. Parent & Guardian Information</div>
+          <div class="form-group">
+            <label>Father's Full Name:</label>
+            <input type="text" placeholder="Last Name, First Name, M.I.">
+          </div>
+          <div class="form-group">
+            <label>Mother's Maiden Name:</label>
+            <input type="text" placeholder="Mother's Full Maiden Name" required>
+          </div>
+          <div class="form-group">
+            <label>Parent / Guardian Name:</label>
+            <input type="text" placeholder="Full Name of Primary Contact" required>
+          </div>
+          <div class="form-group">
+            <label>Parent/Guardian Occupation:</label>
+            <input type="text" placeholder="e.g. Farmer, Employee, Self-Employed">
+          </div>
+          <div class="form-group">
+            <label>Emergency Contact Number:</label>
+            <input type="tel" placeholder="09XXXXXXXXX" required>
+          </div>
+          <div class="form-group">
+            <label>Is your family a 4Ps Household Beneficiary?</label>
+            <select><option>No</option><option>Yes</option></select>
+          </div>
+
+          <div class="section-header">3. Academic History & Track Selection</div>
+          <div class="form-group">
+            <label>Student Status / Type:</label>
+            <select>
+              <option>Promoted Grade 9 Student (Regular)</option>
+              <option>Transferee</option>
+              <option>Returning / Balik-Aral</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Last School Attended:</label>
+            <input type="text" placeholder="Name of Previous School" required>
+          </div>
+          <div class="form-group">
+            <label>Grade 9 General Average:</label>
+            <input type="number" step="0.1" min="75" max="100" placeholder="e.g. 90" required>
+          </div>
+          <div class="form-group">
+            <label>Preferred Senior High Track/Strand (1st Choice):</label>
+            <select>
+              <option value="TVL">TVL - Technical-Vocational Livelihood</option>
+              <option value="HUMSS">HUMSS - Humanities & Social Sciences</option>
+              <option value="STEM">STEM - Science & Technology</option>
+              <option value="ABM">ABM - Accountancy & Business</option>
+              <option value="GAS">GAS - General Academic Strand</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Preferred Senior High Track/Strand (2nd Choice):</label>
+            <select>
+              <option value="GAS">GAS - General Academic Strand</option>
+              <option value="TVL">TVL - Technical-Vocational Livelihood</option>
+              <option value="HUMSS">HUMSS - Humanities & Social Sciences</option>
+              <option value="STEM">STEM - Science & Technology</option>
+              <option value="ABM">ABM - Accountancy & Business</option>
+            </select>
+          </div>
+
+          <div class="section-header">4. Document Checklist</div>
+          <div class="form-group">
+            <label>Upload and check submitted documents:</label>
+            <div class="checkbox-group">
+              
+              <!-- Document 1 -->
+              <div class="document-upload-item">
+                <label class="checkbox-item">
+                  <input type="checkbox" required> Form 138 (Grade 9 Report Card)
+                </label>
+                <input type="file" accept=".pdf,image/*" required>
+              </div>
+
+              <!-- Document 2 -->
+              <div class="document-upload-item">
+                <label class="checkbox-item">
+                  <input type="checkbox" required> PSA Birth Certificate (Photocopy)
+                </label>
+                <input type="file" accept=".pdf,image/*" required>
+              </div>
+
+              <!-- Document 3 -->
+              <div class="document-upload-item">
+                <label class="checkbox-item">
+                  <input type="checkbox"> Certificate of Good Moral Character
+                </label>
+                <input type="file" accept=".pdf,image/*">
+              </div>
+
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-success">Submit Enrollment Application</button>
+        </form>
+      </section>
+
+      <section id="admin-view" class="view-section card">
+        <h2 style="font-size: 1.15rem;">Admin Dashboard</h2>
+        <p class="subtitle">Registered Student Masterlist</p>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>LRN</th>
+              <th>Name</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>101234567890</td>
+              <td>Student, A.</td>
+              <td><span class="badge pending">Pending</span></td>
+            </tr>
+            <tr>
+              <td>101234567891</td>
+              <td>Student, B.</td>
+              <td><span class="badge approved">Enrolled</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="about-view" class="view-section card">
+        <h2 style="font-size: 1.15rem;">About Ambaguio High School</h2>
+        <p class="subtitle">Ambaguio, Nueva Vizcaya</p>
+        <hr>
+        <p style="font-size: 0.85rem; line-height: 1.5; color: #334155;">
+          <strong>Ambaguio High School</strong> is committed to providing accessible, high-quality secondary education to students in Ambaguio, Nueva Vizcaya, empowering them with practical academic and technical skills.
+        </p>
+      </section>
+
+      <section id="guidelines-view" class="view-section card">
+        <h2 style="font-size: 1.15rem;">Enrollment Guidelines</h2>
+        <p class="subtitle">Grade 10 Requirements & Policies</p>
+        <hr>
+        <ul style="font-size: 0.85rem; padding-left: 18px; line-height: 1.8; color: #334155;">
+          <li>Grade 9 Report Card (Form 138)</li>
+          <li>PSA Birth Certificate (Photocopy)</li>
+          <li>Learner Reference Number (LRN) Verification</li>
+          <li>Certificate of Good Moral Character</li>
+        </ul>
+      </section>
+
+      <section id="contact-view" class="view-section card">
+        <h2 style="font-size: 1.15rem;">Contact</h2>
+        <p class="subtitle">Help Desk Information</p>
+        <hr>
+        <div class="contact-card">
+          <p style="font-size: 0.85rem; line-height: 1.8; color: #334155;">
+            <strong>Email:</strong> AmbaguioHighSchool.edu.ph<br>
+            <strong>Contact:</strong> 09876543212<br>
+            <strong>Location:</strong> Ambaguio Nueva Vizcaya
+          </p>
+        </div> 
+      </section>
+
+    </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('dropdownMenu');
+      menu.classList.toggle('show');
+    }
+
+    function navigateTo(viewId) {
+      const sections = document.querySelectorAll('.view-section');
+      sections.forEach(sec => sec.classList.remove('active-section'));
+      
+      document.getElementById(viewId).classList.add('active-section');
+      document.getElementById('dropdownMenu').classList.remove('show');
+    }
+
+    function handleLogout() {
+      if (confirm('Are you sure you want to log out?')) {
+        document.getElementById('dropdownMenu').classList.remove('show');
+        document.getElementById('menuWrapper').style.display = 'none';
+        navigateTo('login-view');
+        alert('You have successfully logged out.');
+      }
+    }
+
+    function handleAccountSwitch() {
+      document.getElementById('dropdownMenu').classList.remove('show');
+      document.getElementById('menuWrapper').style.display = 'none';
+      navigateTo('login-view');
+    }
+
+    function handleLoginSubmit(event) {
+      event.preventDefault();
+      const usernameInput = document.getElementById('loginUsername').value;
+      if (usernameInput.trim() !== "") {
+        document.getElementById('currentUserName').innerText = usernameInput;
+        document.getElementById('profileDisplayName').innerText = usernameInput;
+      }
+      document.getElementById('menuWrapper').style.display = 'block';
+      navigateTo('home-view');
+      alert('Welcome back, ' + usernameInput + '!');
+    }
+
+    window.onclick = function(event) {
+      if (!event.target.matches('#menuBtn') && !event.target.matches('#menuBtn *')) {
+        const menu = document.getElementById('dropdownMenu');
+        if (menu && menu.classList.contains('show')) {
+          menu.classList.remove('show');
+        }
+      }
+    }
+  </script>
+</body>
+</html>
